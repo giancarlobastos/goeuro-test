@@ -1,17 +1,16 @@
 package com.goeuro.test.wrapper;
 
-import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.goeuro.test.domain.Location;
 
+import java.io.Serializable;
+
 /**
  * A wrapper for locations.
- * 
+ *
  * @author Giancarlo Bastos Fernandes - giancarlo.bastos.fernandes@gmail.com
  */
-@JsonPropertyOrder({ "id", "name", "type", "latitude", "longitude" })
+@JsonPropertyOrder({"id", "name", "type", "latitude", "longitude"})
 public class LocationWrapper implements Serializable {
 
 	private static final long serialVersionUID = 991629356870781581L;
@@ -22,13 +21,12 @@ public class LocationWrapper implements Serializable {
 		this.location = location;
 	}
 
-	@JsonProperty("_id")
 	public Long getId() {
-		return location.getId();
+		return location.getPositionId();
 	}
 
 	public String getName() {
-		return location.getName();
+		return location.getDisplayName();
 	}
 
 	public String getType() {
@@ -36,10 +34,10 @@ public class LocationWrapper implements Serializable {
 	}
 
 	public Double getLatitude() {
-		return location.getGeoPosition().getLatitude();
+		return location.getLatitude();
 	}
 
 	public Double getLongitude() {
-		return location.getGeoPosition().getLongitude();
+		return location.getLongitude();
 	}
 }

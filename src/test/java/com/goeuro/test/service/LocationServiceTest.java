@@ -1,10 +1,7 @@
 package com.goeuro.test.service;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.ByteArrayOutputStream;
-import java.text.MessageFormat;
-
+import com.goeuro.test.Application;
+import com.goeuro.test.domain.Location;
 import org.hamcrest.beans.SamePropertyValuesAs;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,9 +18,10 @@ import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.client.response.MockRestResponseCreators;
 import org.springframework.web.client.RestTemplate;
 
-import com.goeuro.test.Application;
-import com.goeuro.test.domain.GeoPosition;
-import com.goeuro.test.domain.Location;
+import java.io.ByteArrayOutputStream;
+import java.text.MessageFormat;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -42,56 +40,41 @@ public class LocationServiceTest {
 	public void getLocationsTest() {
 		MockRestServiceServer server = MockRestServiceServer.createServer(restTemplate);
 
-		String berlinRequestUrl = MessageFormat.format(serviceUrl, "Berlin");
+		String berlinRequestUrl = MessageFormat.format(serviceUrl, "Maringa");
 		server.expect(MockRestRequestMatchers.requestTo(berlinRequestUrl))
 				.andExpect(MockRestRequestMatchers.method(HttpMethod.GET))
 				.andRespond(
-						MockRestResponseCreators.withSuccess(new ClassPathResource("Berlin.json"),
+						MockRestResponseCreators.withSuccess(new ClassPathResource("Maringa.json"),
 								MediaType.APPLICATION_JSON));
 
-		Location expectedBerlinLocation = getBerlinLocation();
+		Location expectedMaringaLocation = getMaringaLocation();
 
-		Location[] locations = locationService.getLocations("Berlin");
-		Location berlinLocation = locations[0];
-
-		// compare geoPosition first to avoid deep compare with SamePropertyValuesAs.<T>samePropertyValuesAs()
-		Assert.assertThat(expectedBerlinLocation.getGeoPosition(),
-				SamePropertyValuesAs.samePropertyValuesAs(berlinLocation.getGeoPosition()));
-		expectedBerlinLocation.setGeoPosition(null);
-		berlinLocation.setGeoPosition(null);
-
-		Assert.assertThat(expectedBerlinLocation, SamePropertyValuesAs.samePropertyValuesAs(berlinLocation));
+		Location[] locations = locationService.getLocations("Maringa");
+		Location maringaLocation = locations[0];
+		Assert.assertThat(expectedMaringaLocation, SamePropertyValuesAs.samePropertyValuesAs(maringaLocation));
 	}
 
 	@Test
 	public void writeLocationCsv() throws Exception {
-		Location[] locations = { getBerlinLocation() };
+		Location[] locations = {getMaringaLocation()};
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 
 		locationService.writeLocationCsv(output, locations);
 
-		assertEquals("376217,Berlin,location,52.52437,13.41053\n", output.toString());
+		assertEquals("371131,Maringá,location,-23.42528,-51.93861\n", output.toString());
 	}
 
-	private Location getBerlinLocation() {
+	private Location getMaringaLocation() {
 		Location location = new Location();
-		location.setId(376217L);
-		location.setKey(null);
-		location.setName("Berlin");
-		location.setFullName("Berlin, Germany");
-		location.setIataAirportCode(null);
+		location.setPositionId(371131L);
+		location.setDisplayName("Maringá");
+		location.setDefaultName("Maringá");
 		location.setType("location");
-		location.setCountry("Germany");
-		location.setLocationId(8384L);
-		location.setInEurope(true);
-		location.setCountryCode("DE");
-		location.setCoreCountry(true);
-		location.setDistance(null);
-
-		GeoPosition geoPosition = new GeoPosition();
-		geoPosition.setLatitude(52.52437);
-		geoPosition.setLongitude(13.41053);
-		location.setGeoPosition(geoPosition);
+		location.setInEurope(false);
+		location.setCountryCode("BR");
+		location.setDistanceToCityCenterInMeters(0L);
+		location.setLatitude(-23.42528);
+		location.setLongitude(-51.93861);
 		return location;
 	}
 }

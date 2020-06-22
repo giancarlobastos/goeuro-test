@@ -1,21 +1,19 @@
 package com.goeuro.test.service;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.ByteArrayOutputStream;
-import java.util.LinkedList;
-import java.util.List;
-
+import com.goeuro.test.Application;
+import com.goeuro.test.domain.Location;
+import com.goeuro.test.wrapper.LocationWrapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.goeuro.test.Application;
-import com.goeuro.test.domain.GeoPosition;
-import com.goeuro.test.domain.Location;
-import com.goeuro.test.wrapper.LocationWrapper;
+import java.io.ByteArrayOutputStream;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -29,14 +27,11 @@ public class CsvServiceTest {
 		List<LocationWrapper> locations = new LinkedList<LocationWrapper>();
 
 		Location location = new Location();
-		location.setId(123456L);
-		location.setName("Barueri");
+		location.setPositionId(123456L);
+		location.setDisplayName("Barueri");
 		location.setType("location");
-
-		GeoPosition geoPosition = new GeoPosition();
-		geoPosition.setLatitude(1.123);
-		geoPosition.setLongitude(4.567);
-		location.setGeoPosition(geoPosition);
+		location.setLatitude(1.123);
+		location.setLongitude(4.567);
 
 		LocationWrapper wrapper = new LocationWrapper(location);
 		locations.add(wrapper);

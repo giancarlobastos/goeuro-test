@@ -1,34 +1,32 @@
 package com.goeuro.test.service;
 
-import java.io.OutputStream;
-import java.util.LinkedList;
-import java.util.List;
-
-import org.apache.log4j.Logger;
+import com.goeuro.test.domain.Location;
+import com.goeuro.test.wrapper.LocationWrapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.goeuro.test.domain.Location;
-import com.goeuro.test.wrapper.LocationWrapper;
+import java.io.OutputStream;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Service responsible to query locations.
- * 
+ *
  * @author Giancarlo Bastos Fernandes - giancarlo.bastos.fernandes@gmail.com
  */
+@Slf4j
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class LocationService {
 
-	private static Logger log = Logger.getLogger(LocationService.class);
+	private final CsvService csvService;
 
-	@Autowired
-	private CsvService csvService;
-
-	@Autowired
-	private RestTemplate restTemplate;
+	private final RestTemplate restTemplate;
 
 	/* URL of the webservice */
 	@Value("${serviceUrl}")

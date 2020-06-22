@@ -1,26 +1,24 @@
 package com.goeuro.test.service;
 
-import java.io.BufferedOutputStream;
-import java.io.OutputStream;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
+import java.util.List;
 
 /**
  * Service responsible to generate CSV files.
  * 
  * @author Giancarlo Bastos Fernandes - giancarlo.bastos.fernandes@gmail.com
  */
+@Slf4j
 @Service
 public class CsvService {
-
-	private static Logger log = Logger.getLogger(CsvService.class);
 
 	/**
 	 * Write the CSV representation of the objects to the given stream.

@@ -1,0 +1,60 @@
+[
+  {
+    "positionId": 371131,
+    "displayName": "Maringá",
+    "defaultName": "Maringá",
+    "translatedNames": {
+      "zh": "馬林加",
+      "ru": "Маринга"
+    },
+    "translatedRegionNames": {},
+    "countryCode": "BR",
+    "countryNameInUserLocale": "Brazil",
+    "latitude": -23.42528,
+    "longitude": -51.93861,
+    "locationPositionId": 371131,
+    "inEurope": false,
+    "type": "location",
+    "population": 311724,
+    "timeZone": "America/Sao_Paulo",
+    "code": null,
+    "distanceToCityCenterInMeters": 0,
+    "fuzzyMatch": false,
+    "children": [
+      {
+        "positionId": 314163,
+        "displayName": "Maringa",
+        "defaultName": "Maringa",
+        "translatedNames": {},
+        "translatedRegionNames": {},
+        "countryCode": "BR",
+        "countryNameInUserLocale": "Brazil",
+        "latitude": -23.47587,
+        "longitude": -52.01566,
+        "locationPositionId": 371314,
+        "inEurope": false,
+        "type": "airport",
+        "population": 34365,
+        "timeZone": "America/Sao_Paulo",
+        "code": "MGF",
+        "distanceToCityCenterInMeters": 11281,
+        "fuzzyMatch": false,
+        "children": [],
+        "properties": [],
+        "locationDetails": {
+          "trainStations": 0,
+          "busStations": 0,
+          "airports": 0,
+          "ferryTerminals": 0
+        }
+      }
+    ],
+    "properties": [],
+    "locationDetails": {
+      "trainStations": 0,
+      "busStations": 0,
+      "airports": 0,
+      "ferryTerminals": 0
+    }
+  }
+]
